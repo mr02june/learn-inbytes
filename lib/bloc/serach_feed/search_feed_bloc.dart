@@ -1,8 +1,4 @@
-// Flutter imports:
-import 'package:flutter/cupertino.dart';
-
-// Package imports:
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:inshort_clone/model/news_model.dart';
@@ -11,13 +7,12 @@ import 'search_feed_event.dart';
 import 'search_feed_state.dart';
 
 class SearchFeedBloc extends Bloc<SearchFeedEvent, SearchFeedState> {
-  NewsFeedRepository repository;
-  SearchFeedBloc({@required this.repository});
+  final NewsFeedRepository repository;
 
-  @override
-  SearchFeedState get initialState => SearchFeedInitialState();
+  // Constructor with the initialState as a parameter
+  SearchFeedBloc({required this.repository}) : super(SearchFeedInitialState());
 
-  @override
+  // @override
   Stream<SearchFeedState> mapEventToState(SearchFeedEvent event) async* {
     if (event is FetchNewsBySearchQueryEvent) {
       yield SearchFeedLoadingState();

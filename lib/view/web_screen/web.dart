@@ -2,24 +2,27 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Project imports:
 import 'package:inshort_clone/controller/feed_controller.dart';
 import 'package:inshort_clone/controller/provider.dart';
 
+@RoutePage()
 class WebScreen extends StatefulWidget {
   final String url;
   final bool isFromBottom;
-  final PageController pageController;
+  final PageController? pageController;
 
   WebScreen(
-      {@required this.url, @required this.isFromBottom, this.pageController});
+      {required this.url, required this.isFromBottom,  this.pageController});
 
   @override
   _WebScreenState createState() => _WebScreenState();
@@ -42,12 +45,17 @@ class _WebScreenState extends State<WebScreen> {
         centerTitle: true,
         backgroundColor: Colors.black,
         leading: IconButton(
-            icon: Icon(FeatherIcons.chevronLeft),
+            // icon: Icon(FeatherIcons.chevronLeft),
+            icon: FaIcon(
+              FontAwesomeIcons.arrowLeft,
+              size: 20,
+              color: Colors.white,
+            ),
             onPressed: () {
               widget.isFromBottom
                   ? Navigator.pop(context)
                   : widget.pageController != null
-                      ? widget.pageController.jumpToPage(0)
+                      ? widget.pageController?.jumpToPage(0)
                       : FeedController.addCurrentPage(1);
             }),
         actions: <Widget>[
@@ -57,7 +65,7 @@ class _WebScreenState extends State<WebScreen> {
                   AsyncSnapshot<WebViewController> snapshot) {
                 final bool webViewReady =
                     snapshot.connectionState == ConnectionState.done;
-                final WebViewController controller = snapshot.data;
+                final WebViewController? controller = snapshot.data;
                 return IconButton(
                   icon: const Icon(Icons.replay),
                   onPressed: !webViewReady
@@ -66,7 +74,7 @@ class _WebScreenState extends State<WebScreen> {
                           setState(() {
                             loading = true;
                           });
-                          controller.reload();
+                          controller?.reload();
                         },
                 );
               }),

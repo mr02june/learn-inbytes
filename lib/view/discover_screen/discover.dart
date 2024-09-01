@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -16,6 +17,7 @@ import 'package:inshort_clone/view/discover_screen/widgets/headline.dart';
 import 'package:inshort_clone/view/discover_screen/widgets/topics_card.dart';
 import 'widgets/app_bar.dart';
 
+@RoutePage()
 class DiscoverScreen extends StatefulWidget {
   @override
   _DiscoverScreenState createState() => _DiscoverScreenState();

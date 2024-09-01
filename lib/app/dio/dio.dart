@@ -5,34 +5,34 @@ import 'package:dio/dio.dart';
 import 'package:inshort_clone/global/global.dart';
 
 class GetDio {
-  bool loggedIn;
+  bool loggedIn = false;
   GetDio._();
 
   static Dio getDio() {
-    Dio dio = new Dio();
+    Dio dio = Dio();
     dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (RequestOptions options) async {
-          options.connectTimeout = 90000;
-          options.receiveTimeout = 90000;
-          options.sendTimeout = 90000;
-          options.followRedirects = true;
-          options.baseUrl = "http://newsapi.org/v2/";
-          options.headers["X-Api-Key"] = "${Global.apikey}";
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
+          options
+            ..connectTimeout = const Duration(seconds: 90).inMilliseconds
+            ..receiveTimeout = const Duration(seconds: 90).inMilliseconds
+            ..sendTimeout = const Duration(seconds: 90).inMilliseconds
+            ..followRedirects = true
+            ..baseUrl = "http://newsapi.org/v2/"
+            ..headers["X-Api-Key"] = Global.apikey;
 
-          return options;
+          handler.next(options); // Continue with the request
         },
-        onResponse: (Response response) async {
-          return response;
+        onResponse: (Response response, ResponseInterceptorHandler handler) async {
+          handler.next(response); // Continue with the response
         },
-        onError: (DioError dioError) async {
-          if (dioError.type == DioErrorType.DEFAULT) {
+        onError: (DioError dioError, ErrorInterceptorHandler handler) async {
+          if (dioError.type == DioErrorType.connectTimeout) {
             if (dioError.message.contains('SocketException')) {
-              print("no internet");
+              print("No internet");
             }
           }
-
-          return dioError.response; //continue
+          handler.next(dioError); // Continue with the error
         },
       ),
     );

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Project imports:
 import 'package:inshort_clone/style/colors.dart';
@@ -7,18 +8,13 @@ import 'package:inshort_clone/style/colors.dart';
 final ThemeData kDarkThemeData = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Color(0xff222222),
-  accentColorBrightness: Brightness.dark,
   primaryColor: AppColor.accent,
-  accentIconTheme: IconThemeData(
-    color: AppColor.accent,
-  ),
-  accentColor: AppColor.accent,
+  hintColor: AppColor.accent,
   appBarTheme: AppBarTheme(
     color: Color(0xff333333),
-    brightness: Brightness.dark,
     iconTheme: IconThemeData(
       color: AppColor.accent,
-    ),
+    ), systemOverlayStyle: SystemUiOverlayStyle.light,
   ),
   iconTheme: IconThemeData(
     color: AppColor.accent,
@@ -28,9 +24,8 @@ final ThemeData kDarkThemeData = ThemeData(
 
 final ThemeData kLightThemeData = ThemeData(
   canvasColor: AppColor.background,
-  accentColor: AppColor.accent,
-  errorColor: AppColor.error,
-  cursorColor: AppColor.primaryVariant,
+  hintColor: AppColor.accent,
+  cardColor: AppColor.error,
   scaffoldBackgroundColor: Colors.white,
   brightness: Brightness.light,
   iconTheme: IconThemeData(
@@ -38,10 +33,9 @@ final ThemeData kLightThemeData = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     color: Colors.white,
-    brightness: Brightness.light,
     iconTheme: IconThemeData(
       color: AppColor.accent,
-    ),
+    ), systemOverlayStyle: SystemUiOverlayStyle.dark,
   ),
-  fontFamily: "Montserrat",
+  fontFamily: "Montserrat", textSelectionTheme: TextSelectionThemeData(cursorColor: AppColor.primaryVariant),
 );

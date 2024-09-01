@@ -1,8 +1,9 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ import 'package:inshort_clone/style/colors.dart';
 import 'package:inshort_clone/style/text_style.dart';
 import '../../aplication_localization.dart';
 
+@RoutePage()
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,10 @@ class SettingsScreen extends StatelessWidget {
         builder: (context, settingsProvider, child) => ListView(
           children: <Widget>[
             ListTile(
-              leading: Icon(FeatherIcons.sunset),
+              leading: Icon(
+                // FeatherIcons.sunset,
+                FontAwesomeIcons.solidSun,
+              ),
               title: Text(AppLocalizations.of(context).translate('dark_theme')),
               subtitle: Text(
                   AppLocalizations.of(context).translate('darktheme_message')),
@@ -62,7 +67,9 @@ class SettingsScreen extends StatelessWidget {
                     );
                   }).toList(),
                   onChanged: (v) {
-                    settingsProvider.setLang(v);
+                    if (v != null) {
+                      settingsProvider.setLang(v as String);
+                    }
                   }),
             )
           ],

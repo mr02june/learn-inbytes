@@ -1,10 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:hive/hive.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:inshort_clone/controller/provider.dart';
 import 'package:inshort_clone/model/news_model.dart';
 import 'package:inshort_clone/services/news/offline_service.dart';
-import 'package:inshort_clone/services/news/share_service.dart';
+// import 'package:inshort_clone/services/news/share_service.dart';
 import 'package:inshort_clone/style/colors.dart';
 import 'package:inshort_clone/style/text_style.dart';
 import '../../../aplication_localization.dart';
@@ -22,9 +21,9 @@ class BottomActionBar extends StatelessWidget {
   final Articles articles;
 
   const BottomActionBar({
-    Key key,
+    Key? key,
     this.containerKey,
-    this.articles,
+    required this.articles,
   }) : super(key: key);
 
   @override
@@ -38,13 +37,15 @@ class BottomActionBar extends StatelessWidget {
         children: <Widget>[
           actionButton(
             title: AppLocalizations.of(context).translate("share"),
-            icon: FeatherIcons.share2,
+            // icon: FeatherIcons.share2,
+            icon: FontAwesomeIcons.shareNodes,
             onTap: () {
               Provider.of<FeedProvider>(context, listen: false)
                   .setWatermarkVisible(true);
 
-              Future.delayed(Duration(seconds: 2),
-                  () => convertWidgetToImageAndShare(context, containerKey));
+              // Future.delayed(Duration(seconds: 2),
+              //     () => convertWidgetToImageAndShare(context, containerKey));
+              print('share');
             },
           ),
           WatchBoxBuilder(
@@ -53,7 +54,8 @@ class BottomActionBar extends StatelessWidget {
               title: AppLocalizations.of(context).translate("bookmark"),
               icon: snap.containsKey(articles.url)
                   ? Icons.bookmark
-                  : FeatherIcons.bookmark,
+                  // : FeatherIcons.bookmark,
+                  : FontAwesomeIcons.bookmark,
               onTap: () {
                 handleBookmarks(articles);
               },
@@ -65,9 +67,9 @@ class BottomActionBar extends StatelessWidget {
   }
 
   Widget actionButton({
-    @required String title,
-    @required IconData icon,
-    @required Function onTap,
+    required String title,
+    required IconData icon,
+    void Function()? onTap,
   }) {
     return InkWell(
       onTap: onTap,

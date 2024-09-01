@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -31,7 +32,8 @@ class NewsCardAppBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           IconButton(
-                            icon: Icon(FeatherIcons.chevronLeft),
+                            // icon: Icon(FeatherIcons.chevronLeft),
+                            icon: Icon(FontAwesomeIcons.arrowLeft),
                             color: AppColor.accent,
                             onPressed: () {
                               Navigator.pop(context);
@@ -50,7 +52,8 @@ class NewsCardAppBar extends StatelessWidget {
                     builder: (context, value, child) =>
                         value.getCurentArticalIndex != 0
                             ? IconButton(
-                                icon: Icon(FeatherIcons.arrowUp),
+                                // icon: Icon(FeatherIcons.arrowUp),
+                                icon: Icon(FontAwesomeIcons.arrowUp),
                                 onPressed: () {
                                   value.getfeedPageController.animateToPage(0,
                                       duration: Duration(milliseconds: 700),

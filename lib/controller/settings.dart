@@ -14,15 +14,13 @@ class SettingsProvider extends ChangeNotifier {
     switch (value) {
       case "ಕನ್ನಡ":
         return "kn";
-        break;
+        // break;
       case "हिंदी":
         return "hi";
-
-        break;
+        // break;
       case "मराठी":
         return "mr";
-
-        break;
+        // break;
       default:
         return "en";
     }

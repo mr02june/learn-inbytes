@@ -1,5 +1,7 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:inshort_clone/routes/routes.gr.dart';
 
 // Package imports:
 import 'package:intl/intl.dart';
@@ -7,24 +9,25 @@ import 'package:intl/intl.dart';
 // Project imports:
 import 'package:inshort_clone/global/global.dart';
 import 'package:inshort_clone/model/news_model.dart';
-import 'package:inshort_clone/routes/rouut.dart';
+// import 'package:inshort_clone/routes/rouut.dart';
 import 'package:inshort_clone/style/colors.dart';
 
 class SearchNewsCard extends StatelessWidget {
   final List<Articles> articles;
   final int index;
 
-  const SearchNewsCard({Key key, this.articles, this.index}) : super(key: key);
+  const SearchNewsCard({Key? key, required this.articles, required this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var article = articles[index];
-
+    var  router = AutoRouter.of(context);
     return GestureDetector(
-      onTap: () => Rouut.navigator.pushNamed(
-        Rouut.feedScreen,
-        arguments: FeedScreenArguments(
-            articalIndex: index, articals: articles, isFromSearch: true),
-      ),
+      onTap: () => router.push(FeedRoute(articalIndex: index, articals: articles, isFromSearch: true)),
+      //  Rouut.navigator.pushNamed(
+      //   Rouut.feedScreen,
+      //   arguments: FeedScreenArguments(
+      //       articalIndex: index, articals: articles, isFromSearch: true),
+      // ),
       child: Padding(
         padding: const EdgeInsets.only(
           right: 16,

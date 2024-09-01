@@ -1,14 +1,17 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:photo_view/photo_view.dart';
 
+@RoutePage()
 class ExpandedImageView extends StatelessWidget {
   final image;
 
-  ExpandedImageView({@required this.image});
+  ExpandedImageView({required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,8 @@ class ExpandedImageView extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
                     icon: Icon(
-                      FeatherIcons.x,
+                      // FeatherIcons.x,
+                      FontAwesomeIcons.xmark,
                       size: 30,
                       color: Colors.white,
                     ),

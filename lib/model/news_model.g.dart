@@ -8,10 +8,13 @@ part of 'news_model.dart';
 
 class ArticlesAdapter extends TypeAdapter<Articles> {
   @override
+  final int typeId = 101;
+
+  @override
   Articles read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Articles(
       sourceName: fields[0] as String,
@@ -48,5 +51,12 @@ class ArticlesAdapter extends TypeAdapter<Articles> {
   }
 
   @override
-  int get typeId => 101;
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ArticlesAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

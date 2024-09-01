@@ -3,7 +3,6 @@ import 'dart:ui';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 // Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,7 +17,7 @@ import '../../../aplication_localization.dart';
 class BottomBar extends StatelessWidget {
   final Articles articles;
 
-  const BottomBar({Key key, this.articles}) : super(key: key);
+  const BottomBar({Key? key, required this.articles}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

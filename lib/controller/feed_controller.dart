@@ -6,9 +6,9 @@ class FeedController {
   static StreamController _currentArticleIndex =
       StreamController<int>.broadcast();
 
-  static Stream<int> get _currentPageStream => _currentPage.stream;
+  static Stream<int> get _currentPageStream => _currentPage.stream as Stream<int>;
   static Stream<int> get _currentArticleIndexStream =>
-      _currentArticleIndex.stream;
+      _currentArticleIndex.stream as Stream<int>;
 
   static void addCurrentPage(int page) {
     _currentPage.sink.add(page);
@@ -22,11 +22,9 @@ class FeedController {
     int page = 1;
     _currentPageStream.listen(
       (onData) {
-        if (onData != null) {
-          page = onData;
-          function(onData);
-        }
-      },
+        page = onData;
+        function(onData);
+            },
     );
     return page;
   }
@@ -35,11 +33,9 @@ class FeedController {
     int index = 0;
     _currentArticleIndexStream.listen(
       (onData) {
-        if (onData != null) {
-          index = onData;
-          function(onData);
-        }
-      },
+        index = onData;
+        function(onData);
+            },
     );
     return index;
   }

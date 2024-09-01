@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -18,6 +19,7 @@ import 'package:inshort_clone/view/feed_screen/feed.dart';
 import 'package:inshort_clone/view/web_screen/web.dart';
 import '../../aplication_localization.dart';
 
+@RoutePage()
 class AppBase extends StatefulWidget {
   @override
   _AppBaseState createState() => _AppBaseState();
@@ -25,8 +27,8 @@ class AppBase extends StatefulWidget {
 
 class _AppBaseState extends State<AppBase> with AutomaticKeepAliveClientMixin {
   int currentPage = 1;
-  PageController _pageController;
-  FeedProvider provider;
+  late PageController _pageController;
+  late FeedProvider provider;
 
   @override
   void initState() {
@@ -63,7 +65,7 @@ class _AppBaseState extends State<AppBase> with AutomaticKeepAliveClientMixin {
             PageView(
               controller: _pageController,
               onPageChanged: (page) {
-                currentPage = _pageController.page.round();
+                currentPage = _pageController.page?.round() ?? 0;
                 if (currentPage == 2) {
                   value.setAppBarVisible(false);
                 } else {

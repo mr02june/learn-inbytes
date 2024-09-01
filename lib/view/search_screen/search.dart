@@ -1,8 +1,10 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+// import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -13,6 +15,7 @@ import 'package:inshort_clone/bloc/serach_feed/search_feed_state.dart';
 import 'package:inshort_clone/style/text_style.dart';
 import 'package:inshort_clone/view/search_screen/widget/search_news_card.dart';
 
+@RoutePage()
 class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,8 @@ class SearchScreen extends StatelessWidget {
               border: InputBorder.none,
               suffixIcon: IconButton(
                 icon: Icon(
-                  FeatherIcons.x,
+                  // FeatherIcons.x,
+                  FontAwesomeIcons.xmark,
                 ),
                 onPressed: () => _searchController.clear(),
               ),
@@ -48,7 +52,8 @@ class SearchScreen extends StatelessWidget {
           ),
           leading: IconButton(
             icon: Icon(
-              FeatherIcons.arrowLeft,
+              // FeatherIcons.arrowLeft,
+              FontAwesomeIcons.arrowLeft,
             ),
             onPressed: () {
               Navigator.pop(context);

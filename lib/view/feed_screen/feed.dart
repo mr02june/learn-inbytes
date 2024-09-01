@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,16 +12,17 @@ import 'package:inshort_clone/controller/provider.dart';
 import 'package:inshort_clone/model/news_model.dart';
 import 'package:inshort_clone/view/web_screen/web.dart';
 
+@RoutePage()
 class FeedScreen extends StatefulWidget {
   final List<Articles> articals;
   final int articalIndex;
   final bool isFromSearch;
 
   const FeedScreen(
-      {Key key,
-      @required this.articalIndex,
-      @required this.articals,
-      @required this.isFromSearch})
+      {Key? key,
+      required this.articalIndex,
+      required this.articals,
+      required this.isFromSearch})
       : super(key: key);
 
   @override

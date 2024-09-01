@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:inshort_clone/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -16,6 +17,7 @@ import 'package:inshort_clone/style/theme.dart';
 import '../aplication_localization.dart';
 
 class App extends StatelessWidget {
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
     //
@@ -31,7 +33,7 @@ class App extends StatelessWidget {
               SearchFeedBloc(repository: NewsFeedRepositoryImpl(context)),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: "Inshorts Clone",
           theme: kLightThemeData,
@@ -40,8 +42,7 @@ class App extends StatelessWidget {
               Provider.of<SettingsProvider>(context, listen: true).isDarkThemeOn
                   ? ThemeMode.dark
                   : ThemeMode.light,
-          onGenerateRoute: Rouut.onGenerateRoute,
-          navigatorKey: Rouut.navigatorKey,
+          routerConfig: _appRouter.config(),
           supportedLocales: [
             Locale('en', 'US'),
             Locale('hi', 'IN'),
@@ -54,6 +55,9 @@ class App extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           localeResolutionCallback: (locale, supportedLocales) {
+            if (locale == null) {
+              return supportedLocales.first;
+            }
             // Check if the current device locale is supported
             for (var supportedLocale in supportedLocales) {
               if (supportedLocale.languageCode == locale.languageCode &&
@@ -61,7 +65,6 @@ class App extends StatelessWidget {
                 return supportedLocale;
               }
             }
-
             return supportedLocales.first;
           },
           locale: Locale(

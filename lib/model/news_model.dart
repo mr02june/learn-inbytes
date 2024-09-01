@@ -8,26 +8,25 @@ class NewsModel {
   int totalResults;
   List<Articles> articles;
 
-  NewsModel({this.status, this.totalResults, this.articles});
+  NewsModel({
+    required this.status,
+    required this.totalResults,
+    required this.articles,
+  });
 
-  NewsModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    totalResults = json['totalResults'];
-    if (json['articles'] != null) {
-      articles = new List<Articles>();
-      json['articles'].forEach((v) {
-        articles.add(new Articles.fromJson(v));
-      });
-    }
-  }
+  NewsModel.fromJson(Map<String, dynamic> json)
+      : status = json['status'] ?? '',
+        totalResults = json['totalResults'] ?? 0,
+        articles = (json['articles'] as List<dynamic>?)
+                ?.map((v) => Articles.fromJson(v))
+                .toList() ??
+            [];
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['totalResults'] = this.totalResults;
-    if (this.articles != null) {
-      data['articles'] = this.articles.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['totalResults'] = totalResults;
+    data['articles'] = articles.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -51,60 +50,60 @@ class Articles {
   @HiveField(7)
   String content;
 
-  Articles(
-      {this.sourceName,
-      this.author,
-      this.title,
-      this.description,
-      this.url,
-      this.urlToImage,
-      this.publishedAt,
-      this.content});
+  Articles({
+    required this.sourceName,
+    required this.author,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.urlToImage,
+    required this.publishedAt,
+    required this.content,
+  });
 
-  Articles.fromJson(Map<String, dynamic> json) {
-    sourceName = json['source'] != null
-        ? new Source.fromJson(json['source']).name
-        : null;
-    author = json['author'];
-    title = json['title'];
-    description = json['description'];
-    url = json['url'];
-    urlToImage = json['urlToImage'];
-    publishedAt = json['publishedAt'];
-    content = json['content'];
-  }
+  Articles.fromJson(Map<String, dynamic> json)
+      : sourceName = json['source'] != null
+            ? Source.fromJson(json['source']).name
+            : '',
+        author = json['author'],
+        title = json['title'],
+        description = json['description'],
+        url = json['url'],
+        urlToImage = json['urlToImage'],
+        publishedAt = json['publishedAt'],
+        content = json['content'];
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.sourceName != null) {
-      data['sourceName'] = this.sourceName;
-    }
-    data['author'] = this.author;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['url'] = this.url;
-    data['urlToImage'] = this.urlToImage;
-    data['publishedAt'] = this.publishedAt;
-    data['content'] = this.content;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['sourceName'] = sourceName;
+    data['author'] = author;
+    data['title'] = title;
+    data['description'] = description;
+    data['url'] = url;
+    data['urlToImage'] = urlToImage;
+    data['publishedAt'] = publishedAt;
+    data['content'] = content;
     return data;
   }
 }
 
 class Source {
-  String id;
+  String? id;
   String name;
 
-  Source({this.id, this.name});
+  Source({
+    this.id,
+    required this.name,
+  });
 
-  Source.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
+  Source.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        name = json['name'] ?? '';
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }

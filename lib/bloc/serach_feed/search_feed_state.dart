@@ -1,6 +1,6 @@
 // Package imports:
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+// import 'package:meta/meta.dart';
 
 // Project imports:
 import 'package:inshort_clone/model/news_model.dart';
@@ -19,16 +19,16 @@ class SearchFeedLoadingState extends SearchFeedState {
 
 class SearchFeedLoadedState extends SearchFeedState {
   final List<Articles> news;
-  SearchFeedLoadedState({@required this.news});
+  SearchFeedLoadedState({required this.news});
   get moviesList => news;
 
   @override
-  List<Object> get props => null;
+  List<Object> get props => [news]; // Include the properties used for equality
 }
 
 class SearchFeedErrorState extends SearchFeedState {
   final String message;
-  SearchFeedErrorState({@required this.message});
+  SearchFeedErrorState({required this.message});
   @override
-  List<Object> get props => null;
+  List<Object> get props => [message]; // Include the properties used for equality
 }
