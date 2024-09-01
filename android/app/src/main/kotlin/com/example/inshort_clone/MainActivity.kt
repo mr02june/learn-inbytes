@@ -1,4 +1,4 @@
-package com.example.ppp
+package com.example.inshort_clone
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -5,19 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inshort_clone/routes/routes.dart';
+import 'package:inshort_clone/view/app_base/app_base.dart';
+import 'package:inshort_clone/view/feed_screen/feed.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:inshort_clone/bloc/feed/news_feed_bloc.dart';
 import 'package:inshort_clone/bloc/serach_feed/search_feed_bloc.dart';
 import 'package:inshort_clone/controller/settings.dart';
-import 'package:inshort_clone/routes/rouut.dart';
+// import 'package:inshort_clone/routes/rouut.dart';
 import 'package:inshort_clone/services/news/news_service.dart';
 import 'package:inshort_clone/style/theme.dart';
 import '../aplication_localization.dart';
 
 class App extends StatelessWidget {
-  final _appRouter = AppRouter();
+  // final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
     //
@@ -33,7 +35,7 @@ class App extends StatelessWidget {
               SearchFeedBloc(repository: NewsFeedRepositoryImpl(context)),
         ),
       ],
-      child: MaterialApp.router(
+      child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Inshorts Clone",
           theme: kLightThemeData,
@@ -42,7 +44,11 @@ class App extends StatelessWidget {
               Provider.of<SettingsProvider>(context, listen: true).isDarkThemeOn
                   ? ThemeMode.dark
                   : ThemeMode.light,
-          routerConfig: _appRouter.config(),
+          // routerConfig: _appRouter.config(),
+          routes: {
+      '/': (context) => AppBase(),
+      // '/details': (context) => DetailScreen(),
+    },
           supportedLocales: [
             Locale('en', 'US'),
             Locale('hi', 'IN'),

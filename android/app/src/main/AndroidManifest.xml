@@ -15,6 +15,7 @@
         <!-- Main activity -->
 <activity
     android:name=".MainActivity"
+    android:exported="true"
     android:theme="@style/LaunchTheme"
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
     android:launchMode="singleTop"
